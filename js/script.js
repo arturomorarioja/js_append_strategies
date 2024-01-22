@@ -4,18 +4,22 @@
  * @author  Arturo Mora-Rioja (amri@kea.dk)
  * @version 1.0.0, December 2022
  * @version 1.1.0, June 2023. Adding a template literal to innerHTML added
+ * @version 1.2.0, January 2024. cloneNode() added
  */
 'use strict';
 
-const iterations = 100000;
-const clearPage = () => { document.querySelector('main > section').innerHTML = ''; }
+let iterations;
+const initialisePage = () => { 
+    iterations = document.querySelector('#txtIterations').value;
+    document.querySelector('main > section').innerHTML = '';
+}
 
 document.querySelector('#multiple').addEventListener('click', (e) => {
     e.preventDefault();
     
+    initialisePage();
     const startTime = Date.now();
-
-    clearPage();
+    
     document.querySelector('main > section').appendChild(document.createElement('ul'));
 
     for (let index = 0; index < iterations; index++) {
@@ -32,9 +36,9 @@ document.querySelector('#multiple').addEventListener('click', (e) => {
 document.querySelector('#single').addEventListener('click', (e) => {
     e.preventDefault();
 
+    initialisePage();
     const startTime = Date.now();
 
-    clearPage();
     const list = document.createElement('ul');
 
     for (let index = 0; index < iterations; index++) {
@@ -50,12 +54,35 @@ document.querySelector('#single').addEventListener('click', (e) => {
     console.log('Single append takes ' + (Date.now() - startTime) + ' ms.');
 });
 
-document.querySelector('#innerHTML').addEventListener('click', (e) => {
+document.querySelector('#cloneNode').addEventListener('click', (e) => {
     e.preventDefault();
 
+    initialisePage();
     const startTime = Date.now();
 
-    clearPage();
+    const list = document.createElement('ul');
+
+    const listItemTemplate = document.createElement('li');
+    listItemTemplate.appendChild(document.createTextNode('cloneNode(): List element number '));
+    listItemTemplate.appendChild(document.createElement('span'));
+
+    for (let index = 0; index < iterations; index++) {
+        let listElement = listItemTemplate.cloneNode(true);
+        listElement.querySelector('span').innerText = index;
+        list.appendChild(listElement);
+    }
+
+    document.querySelector('main > section').appendChild(list);
+
+    console.log('cloneNode() takes ' + (Date.now() - startTime) + ' ms.');
+});
+
+document.querySelector('#innerHTML').addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    initialisePage();
+    const startTime = Date.now();
+
     let list = '<ul>';
     
     for (let index = 0; index < iterations; index++) {
