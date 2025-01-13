@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
-
 :root {
     --colorPrimary: #20408A;
     --colorTextSecondary: floralwhite;
@@ -10,6 +9,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: var(--fontMain);
 }
 
@@ -21,25 +21,25 @@ body > header {
 
 form {
     margin: 1rem;    
-}
-form > div {
-    margin-bottom: 0.5rem;
-}
-input[type=number] {
-    text-align: right;
-}
-button {
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
+    > div {
+        margin-bottom: 0.5rem;
+    }
+    input[type=number] {
+        text-align: right;
+    }
+    button {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+    }
 }
 
 section {
     margin: 0 1rem 2rem 1rem;
+    > ul {
+        margin-left: 1rem;
+    }
 }
 
-section > ul {
-    margin-left: 1rem;
-}
 
 div > h1 {
     font-size: 1.2rem;
