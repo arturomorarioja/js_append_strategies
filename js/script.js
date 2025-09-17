@@ -5,13 +5,13 @@
  * @version 1.0.0, December 2022
  * @version 1.1.0, June 2023. Adding a template literal to innerHTML added
  * @version 1.2.0, January 2024. cloneNode() added
+ * @version 1.2.1, September 2025. Refactoring
  */
 'use strict';
 
-let iterations;
 const initialisePage = () => { 
-    iterations = document.querySelector('#txtIterations').value;
     document.querySelector('main > section').innerHTML = '';
+    return parseInt(document.querySelector('#txtIterations').value);
 }
 
 /**
@@ -20,7 +20,7 @@ const initialisePage = () => {
 document.querySelector('#multiple').addEventListener('click', (e) => {
     e.preventDefault();
     
-    initialisePage();
+    const iterations = initialisePage();
     const startTime = Date.now();
     
     document.querySelector('main > section').appendChild(document.createElement('ul'));
@@ -42,7 +42,7 @@ document.querySelector('#multiple').addEventListener('click', (e) => {
 document.querySelector('#single').addEventListener('click', (e) => {
     e.preventDefault();
 
-    initialisePage();
+    const iterations = initialisePage();
     const startTime = Date.now();
 
     const list = document.createElement('ul');
@@ -66,7 +66,7 @@ document.querySelector('#single').addEventListener('click', (e) => {
 document.querySelector('#cloneNode').addEventListener('click', (e) => {
     e.preventDefault();
 
-    initialisePage();
+    const iterations = initialisePage();
     const startTime = Date.now();
 
     const list = document.createElement('ul');
@@ -92,7 +92,7 @@ document.querySelector('#cloneNode').addEventListener('click', (e) => {
 document.querySelector('#innerHTML').addEventListener('click', (e) => {
     e.preventDefault();
     
-    initialisePage();
+    const iterations = initialisePage();
     const startTime = Date.now();
 
     let list = '<ul>';
